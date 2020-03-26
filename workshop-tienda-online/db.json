@@ -415,13 +415,12 @@
       "thumbImage": "https://www.forever21.com/images/1_front_330/00380495-04.jpg"
     },
     {
-      "salePrice": 14.99,
-      "price": 14.99,
-      "title": "Plaid Cabbie Hat",
-      "url": "https://www.forever21.com/us/shop/catalog/product/f21/acc/2000378367",
+      "title": "Test Title 2",
       "brand": "ACC",
-      "id": "2000378367",
-      "thumbImage": "https://www.forever21.com/images/1_front_330/00378367-02.jpg"
+      "price": "25.99",
+      "salePrice": "35.56",
+      "thumbImage": "https://www.forever21.com/images/1_front_330/00378367-02.jpg",
+      "id": "2000378367"
     },
     {
       "salePrice": 12.99,
@@ -440,6 +439,14 @@
       "brand": "ACC",
       "id": "2000377789",
       "thumbImage": "https://www.forever21.com/images/1_front_330/00377789-02.jpg"
+    },
+    {
+      "title": "mi producto",
+      "brand": "acme",
+      "price": "9.95",
+      "salePrice": "10.55",
+      "thumbImage": "https://www.forever21.com/images/1_front_330/00378367-02.jpg",
+      "id": "0M4hNS4"
     }
   ]
 }

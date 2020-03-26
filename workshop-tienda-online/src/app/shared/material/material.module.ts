@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -11,12 +16,22 @@ import { MatCardModule } from '@angular/material/card';
     CommonModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDialogModule
   ],
   exports: [
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

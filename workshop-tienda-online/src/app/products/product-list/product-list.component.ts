@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogModel } from 'src/app/shared/models/confirm-dialog-model';
+import { catchError } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'ed-product-list',
@@ -54,6 +56,14 @@ export class ProductListComponent implements OnInit {
 
   private loadProducts() {
     this.service.getAll()
+      .pipe(
+        catchError(error => {
+          this.snackBar.open('Can not get Products at this time. Please try again later', null, {
+            duration: 3000
+          });
+          return EMPTY;
+        })
+      )
       .subscribe(data => {
         //console.log('data', data);
         this.products = data;

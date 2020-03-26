@@ -3,6 +3,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '../shared/services/products.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Product } from '../shared/models/product';
+import { catchError } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'ed-product-edit',
@@ -11,15 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProductEditComponent implements OnInit {
 
-  form: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    brand: new FormControl(''),
-    price: new FormControl(''),
-    salePrice: new FormControl(''),
-    thumbImage: new FormControl('')
-  });
-
   id: string;
+  product: Product;
 
   constructor(private route: ActivatedRoute,
               private service: ProductsService,
@@ -30,25 +26,30 @@ export class ProductEditComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id'); //mapa con clave: valor
     // GET /products/:id
     this.service.get(this.id)
+      .pipe(
+        catchError(error => {
+          this.snackBar.open('Can not get Product details at this time. Please try again later', null, {
+            duration: 3000
+          });
+          return EMPTY;
+        })
+      )
       .subscribe(product => {
         console.log('product', product);
-        // this.form.setValue(product);
-        this.form.patchValue(product);
+        this.product = product;
       });
   }
 
   submit() {
-    if(this.form.valid) {
-      const product = this.form.value;
-      product.id = this.id;
-      console.log('Going to update', product);
-      this.service.update(product)
-        .subscribe(result => console.log('Update finished', result));
-      this.router.navigate(['/products']);
-      this.snackBar.open('Product has been update', 'Close',{
-        duration: 3000
-      });
-    }
+    const product = this.product;
+    product.id = this.id;
+    console.log('Going to update', product);
+    this.service.update(product)
+      .subscribe(result => console.log('Update finished', result));
+    this.router.navigate(['/products']);
+    this.snackBar.open('Product has been update', 'Close',{
+      duration: 3000
+    });
   }
 
   cancel() {
